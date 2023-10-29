@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "masterpiece:item/work_markings",
+    "layer1": "masterpiece:item/work_record"
+  }
+}

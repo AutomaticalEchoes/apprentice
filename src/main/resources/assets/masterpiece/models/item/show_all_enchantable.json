@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "masterpiece:item/show_all_equip",
+    "layer1": "masterpiece:item/enchantable"
+  }
+}

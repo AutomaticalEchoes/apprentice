@@ -1,0 +1,19 @@
+{
+  "required": true,
+  "package": "com.automaticalechoes.masterpiece.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "refmap": "mod.refmap.json",
+  "plugin": "com.automaticalechoes.masterpiece.mixin.MixinPlugin",
+  "mixins": [
+    "AbstractVillagerMixin",
+    "MerchantContainerMixin",
+    "VillagerMixin",
+    "MerchantOffersMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
