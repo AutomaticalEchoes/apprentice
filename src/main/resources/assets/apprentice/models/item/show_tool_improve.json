@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "apprentice:item/show_tool",
+    "layer1": "apprentice:item/improve"
+  }
+}
