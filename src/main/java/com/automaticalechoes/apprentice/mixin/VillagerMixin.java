@@ -2,6 +2,7 @@ package com.automaticalechoes.apprentice.mixin;
 
 import com.automaticalechoes.apprentice.api.mixin.VillagerMixinInterface;
 import com.automaticalechoes.apprentice.event.VillagerUpdateTradesEvent;
+
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.npc.VillagerData;

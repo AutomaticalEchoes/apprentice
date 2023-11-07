@@ -40,10 +40,6 @@ public class CommonEvent {
     @SubscribeEvent
     public static void OnVillagerUpdateTrades(VillagerUpdateTradesEvent event){
         int level = event.getVillagerData().getLevel();
-        if(!event.getVillager().getInventory().isEmpty()){
-            Containers.dropContents(event.getVillager().level(),event.getVillager(),event.getVillager().getInventory());
-        }
-
         if(event.getMerchantOffers().size() > 20 && level >= 5 && !((MerchantOffersMixinInterface)event.getMerchantOffers()).hasImprove()){
             ImproveOffer improveOffer = VillagerProfessionImproveOffer.OFFERS.get(event.getVillagerData().getProfession());
             if(improveOffer != null){
