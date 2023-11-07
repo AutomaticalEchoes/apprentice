@@ -46,7 +46,7 @@ public class RecordOffer extends ExtraOffer<RecordOffer> {
     public CompoundTag createTag() {
         CompoundTag tag = super.createTag();
         tag.put(RECORD_OFFER ,this.offerRecordItem.save(new CompoundTag()));
-        tag.putString(ExtraOfferTypes.ExtraOfferType.EXTRA_OFFER,getType().getName());
+        tag.putString(EXTRA_OFFER,getType().getName());
         return tag;
     }
 
@@ -60,13 +60,8 @@ public class RecordOffer extends ExtraOffer<RecordOffer> {
     }
 
     @Override
-    public void appendHoverText(List<Component> p_41423_) {
-
-    }
-
-    @Override
-    public ExtraOfferTypes.ExtraOfferType<RecordOffer> getType() {
-        return ExtraOfferTypes.RECORD_OFFER_TYPE;
+    public Type<RecordOffer> getType() {
+        return Types.RECORD_OFFER_TYPE;
     }
 
 

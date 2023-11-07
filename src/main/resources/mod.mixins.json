@@ -9,7 +9,8 @@
     "AbstractVillagerMixin",
     "MerchantContainerMixin",
     "VillagerMixin",
-    "MerchantOffersMixin"
+    "MerchantOffersMixin",
+    "MerchantResultSlotMixin"
   ],
   "client": [
   ],

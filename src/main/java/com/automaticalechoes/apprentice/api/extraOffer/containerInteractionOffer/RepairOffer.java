@@ -2,7 +2,6 @@ package com.automaticalechoes.apprentice.api.extraOffer.containerInteractionOffe
 
 import com.automaticalechoes.apprentice.api.OfferUtils;
 import com.automaticalechoes.apprentice.api.TagKeyMap;
-import com.automaticalechoes.apprentice.api.extraOffer.ExtraOfferTypes;
 import com.automaticalechoes.apprentice.api.extraOffer.interfaces.LevelUpChangeOffer;
 import com.automaticalechoes.apprentice.config.Config;
 import net.minecraft.ChatFormatting;
@@ -67,20 +66,22 @@ public class RepairOffer extends ContainerInteractionOffer<RepairOffer> implemen
         tag.putInt(REPAIR_VALUE,repairValuePerCost);
         tag.putInt(REWORD_XP_MUT,rewordXpMut);
         tag.putString(ITEM_TAG, TagKeyMap.getKey(itemTag));
-        tag.putString(ExtraOfferTypes.ExtraOfferType.EXTRA_OFFER,getType().getName());
+        tag.putString(EXTRA_OFFER,getType().getName());
         return tag;
     }
 
     @Override
-    public void appendHoverText(List<Component> p_41423_) {
+    public boolean appendHoverText(List<Component> p_41423_) {
         p_41423_ .add(Component.translatable("apprentice.offer.cost_a").append(getCostA().getDisplayName()).append("x" + getCostA().getCount()).withStyle(ChatFormatting.DARK_RED));
         p_41423_.add(Component.translatable("apprentice.offer.fix_type").append(Component.translatable(itemTag.location().toShortLanguageKey())).withStyle(ChatFormatting.DARK_GREEN));
         p_41423_.add(Component.translatable("apprentice.offer.fix").append(String.valueOf(repairValuePerCost * getCostA().getCount())).withStyle(ChatFormatting.GREEN));
+        return true;
     }
 
+
     @Override
-    public ExtraOfferTypes.ExtraOfferType<RepairOffer> getType() {
-        return ExtraOfferTypes.REPAIR_OFFER_TYPE;
+    public Type<RepairOffer> getType() {
+        return Types.REPAIR_OFFER_TYPE;
     }
 
     @Override

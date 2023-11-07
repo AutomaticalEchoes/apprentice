@@ -1,8 +1,8 @@
 package com.automaticalechoes.apprentice.mixin;
 
 import com.automaticalechoes.apprentice.api.extraOffer.ExtraOffer;
+import com.automaticalechoes.apprentice.api.extraOffer.interfaces.Extra;
 import com.automaticalechoes.apprentice.api.mixin.MerchantOffersMixinInterface;
-import com.automaticalechoes.apprentice.api.extraOffer.ExtraOfferTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.FriendlyByteBuf;
@@ -34,8 +34,8 @@ public class MerchantOffersMixin implements MerchantOffersMixinInterface {
 
         for(int i = 0; i < listtag.size(); ++i) {
             CompoundTag compound = listtag.getCompound(i);
-            if(compound.contains(ExtraOfferTypes.ExtraOfferType.EXTRA_OFFER)){
-                ExtraOfferTypes.ExtraOfferType<? extends ExtraOffer<?>> offerType = ExtraOfferTypes.ExtraOfferType.getOfferType(compound.getString(ExtraOfferTypes.ExtraOfferType.EXTRA_OFFER));
+            if(compound.contains(ExtraOffer.EXTRA_OFFER)){
+                Extra.Type<? extends ExtraOffer<?>> offerType = ExtraOffer.Types.getOfferType(compound.getString(ExtraOffer.EXTRA_OFFER));
                 if(offerType != null) {
                     ((MerchantOffers)(Object)this).add(offerType.build(compound));
                 }
@@ -60,8 +60,8 @@ public class MerchantOffersMixin implements MerchantOffersMixinInterface {
         int i = p_45396_.readVarInt();
         for (int i1 = 0; i1 < i; i1++) {
             CompoundTag compound = p_45396_.readNbt();
-            if(compound.contains(ExtraOfferTypes.ExtraOfferType.EXTRA_OFFER)){
-                ExtraOfferTypes.ExtraOfferType<? extends ExtraOffer<?>> offerType = ExtraOfferTypes.ExtraOfferType.getOfferType(compound.getString(ExtraOfferTypes.ExtraOfferType.EXTRA_OFFER));
+            if(compound.contains(ExtraOffer.EXTRA_OFFER)){
+                Extra.Type<? extends ExtraOffer<?>> offerType = ExtraOffer.Types.getOfferType(compound.getString(Extra.EXTRA_OFFER));
                 if(offerType != null) {
                     merchantOffers.add(offerType.build(compound));
                 }

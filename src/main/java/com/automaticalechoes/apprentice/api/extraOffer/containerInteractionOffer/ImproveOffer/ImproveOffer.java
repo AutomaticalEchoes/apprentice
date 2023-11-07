@@ -1,17 +1,14 @@
 package com.automaticalechoes.apprentice.api.extraOffer.containerInteractionOffer.ImproveOffer;
 
 import com.automaticalechoes.apprentice.api.TagKeyMap;
-import com.automaticalechoes.apprentice.api.extraOffer.ExtraOfferTypes;
 import com.automaticalechoes.apprentice.api.extraOffer.containerInteractionOffer.ContainerInteractionOffer;
 import com.automaticalechoes.apprentice.api.extraOffer.interfaces.Improve;
 import com.automaticalechoes.apprentice.config.Config;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.trading.Merchant;
 
 import java.util.List;
 
@@ -40,19 +37,9 @@ public abstract class ImproveOffer extends ContainerInteractionOffer<ImproveOffe
         CompoundTag tag = super.createTag();
         tag.putDouble(EXTRA, extra);
         tag.putString(ITEM_TAG, TagKeyMap.getKey(itemTag));
-        tag.putString(ExtraOfferTypes.ExtraOfferType.EXTRA_OFFER,getType().getName());
+        tag.putString(EXTRA_OFFER,getType().getName());
         return tag;
     }
-
-    @Override
-    public abstract ExtraOfferTypes.ExtraOfferType<ImproveOffer> getType();
-
-    @Override
-    public void appendHoverText(List<Component> p_41423_) {
-
-    }
-
-
 
 
 }

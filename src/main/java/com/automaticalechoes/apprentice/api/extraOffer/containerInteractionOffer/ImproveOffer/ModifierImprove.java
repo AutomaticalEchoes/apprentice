@@ -1,6 +1,5 @@
 package com.automaticalechoes.apprentice.api.extraOffer.containerInteractionOffer.ImproveOffer;
 
-import com.automaticalechoes.apprentice.api.extraOffer.ExtraOfferTypes;
 import com.google.common.collect.Multimap;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.tags.TagKey;
@@ -52,8 +51,8 @@ public class ModifierImprove extends ImproveOffer {
     }
 
     @Override
-    public ExtraOfferTypes.ExtraOfferType<ImproveOffer> getType() {
-        return ExtraOfferTypes.MODIFIER_IMPROVE_OFFER_TYPE;
+    public Type<ImproveOffer> getType() {
+        return Types.MODIFIER_IMPROVE_OFFER_TYPE;
     }
 
     public EquipmentSlot getEquipType(ItemStack itemStack){

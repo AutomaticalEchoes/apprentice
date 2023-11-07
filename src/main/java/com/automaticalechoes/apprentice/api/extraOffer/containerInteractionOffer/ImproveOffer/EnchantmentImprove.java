@@ -1,7 +1,6 @@
 package com.automaticalechoes.apprentice.api.extraOffer.containerInteractionOffer.ImproveOffer;
 
 import com.automaticalechoes.apprentice.Apprentice;
-import com.automaticalechoes.apprentice.api.extraOffer.ExtraOfferTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.npc.AbstractVillager;
@@ -53,8 +52,8 @@ public class EnchantmentImprove extends ImproveOffer{
     }
 
     @Override
-    public ExtraOfferTypes.ExtraOfferType<ImproveOffer> getType() {
-        return ExtraOfferTypes.ENCHANTMENT_IMPROVE_OFFER_TYPE;
+    public Type<ImproveOffer> getType() {
+        return Types.ENCHANTMENT_IMPROVE_OFFER_TYPE;
     }
 
     public static List<Enchantment> Enchantments(ItemStack itemStack){

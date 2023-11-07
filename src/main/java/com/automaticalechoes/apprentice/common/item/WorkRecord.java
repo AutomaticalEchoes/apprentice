@@ -1,7 +1,7 @@
 package com.automaticalechoes.apprentice.common.item;
 
 import com.automaticalechoes.apprentice.api.extraOffer.ExtraOffer;
-import com.automaticalechoes.apprentice.api.extraOffer.ExtraOfferTypes;
+import com.automaticalechoes.apprentice.api.extraOffer.interfaces.Extra;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -64,8 +64,8 @@ public class WorkRecord extends Item {
         MerchantOffer merchantOffer = GetOffer(p_41421_);
         if(!p_41421_.getOrCreateTag().contains(MARK)) {
             p_41423_.add(Component.translatable("apprentice.offer.unknown").withStyle(ChatFormatting.GRAY));
-        }else if(merchantOffer instanceof ExtraOffer extraOffer){
-            extraOffer.appendHoverText(p_41423_);
+        }else if(merchantOffer instanceof ExtraOffer extraOffer && extraOffer.appendHoverText(p_41423_)){
+           return;
         }else if(merchantOffer != null){
             p_41423_.add(Component.translatable("apprentice.offer.cost_a").append(merchantOffer.getCostA().getDisplayName()).append("x" + merchantOffer.getCostA().getCount()).withStyle(ChatFormatting.DARK_RED));
             if(!merchantOffer.getCostB().isEmpty())
@@ -97,8 +97,8 @@ public class WorkRecord extends Item {
     public static MerchantOffer GetOffer(ItemStack itemStack){
         if(itemStack.getItem() instanceof WorkRecord && itemStack.getOrCreateTag().contains(OFFER)){
             CompoundTag compound = itemStack.getOrCreateTag().getCompound(OFFER);
-            if(compound.contains(ExtraOfferTypes.ExtraOfferType.EXTRA_OFFER)){
-                ExtraOfferTypes.ExtraOfferType<? extends ExtraOffer<?>> offerType = ExtraOfferTypes.ExtraOfferType.getOfferType(compound.getString(ExtraOfferTypes.ExtraOfferType.EXTRA_OFFER));
+            if(compound.contains(Extra.EXTRA_OFFER)){
+                Extra.Type<? extends ExtraOffer<?>> offerType = ExtraOffer.Types.getOfferType(compound.getString(ExtraOffer.EXTRA_OFFER));
                 if(offerType != null) {
                     return offerType.build(compound);
                 }

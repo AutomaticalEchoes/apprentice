@@ -3,13 +3,16 @@ package com.automaticalechoes.apprentice;
 import com.automaticalechoes.apprentice.api.extraOffer.containerInteractionOffer.ImproveOffer.VillagerProfessionImproveOffer;
 import com.automaticalechoes.apprentice.api.ModelItem;
 import com.automaticalechoes.apprentice.api.TagKeyMap;
+import com.automaticalechoes.apprentice.api.mixin.ProfessionStorages;
 import com.automaticalechoes.apprentice.common.item.ItemRegister;
 import com.automaticalechoes.apprentice.config.Config;
+import com.google.common.collect.ImmutableSet;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
@@ -26,6 +29,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
 
@@ -81,7 +85,7 @@ public class Apprentice
         TagKeyMap.init();
         ModelItem.init();
         VillagerProfessionImproveOffer.init();
-
+        ProfessionStorages.init();
     }
 
     // Add the example block item to the building blocks tab
