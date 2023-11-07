@@ -3,7 +3,7 @@ package com.automaticalechoes.apprentice.api.extraOffer.containerInteractionOffe
 import com.automaticalechoes.apprentice.api.OfferUtils;
 import com.automaticalechoes.apprentice.api.TagKeyMap;
 import com.automaticalechoes.apprentice.api.extraOffer.ExtraOfferTypes;
-import com.automaticalechoes.apprentice.api.extraOffer.LevelUpChangeOffer;
+import com.automaticalechoes.apprentice.api.extraOffer.interfaces.LevelUpChangeOffer;
 import com.automaticalechoes.apprentice.config.Config;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;

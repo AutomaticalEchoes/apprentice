@@ -1,7 +1,7 @@
 package com.automaticalechoes.apprentice.common;
 
 import com.automaticalechoes.apprentice.api.*;
-import com.automaticalechoes.apprentice.api.extraOffer.LevelUpChangeOffer;
+import com.automaticalechoes.apprentice.api.extraOffer.interfaces.LevelUpChangeOffer;
 import com.automaticalechoes.apprentice.api.extraOffer.containerInteractionOffer.ImproveOffer.ImproveOffer;
 import com.automaticalechoes.apprentice.api.extraOffer.RecordOffer;
 import com.automaticalechoes.apprentice.api.extraOffer.containerInteractionOffer.ImproveOffer.VillagerProfessionImproveOffer;

@@ -1,10 +1,11 @@
 package com.automaticalechoes.apprentice.api.extraOffer;
 
+import com.automaticalechoes.apprentice.api.extraOffer.interfaces.Extra;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.trading.MerchantOffer;
 
-public abstract class ExtraOffer<T extends  ExtraOffer<?>> extends MerchantOffer implements Extra<T>{
+public abstract class ExtraOffer<T extends  ExtraOffer<?>> extends MerchantOffer implements Extra<T> {
     public ExtraOffer(ItemStack costA, ItemStack result , int maxUses, int xp, float priceMultiplier) {
         super(costA, result, maxUses, xp, priceMultiplier);
     }

@@ -1,5 +1,7 @@
-package com.automaticalechoes.apprentice.api.extraOffer;
+package com.automaticalechoes.apprentice.api.extraOffer.interfaces;
 
+import com.automaticalechoes.apprentice.api.extraOffer.ExtraOffer;
+import com.automaticalechoes.apprentice.api.extraOffer.ExtraOfferTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 

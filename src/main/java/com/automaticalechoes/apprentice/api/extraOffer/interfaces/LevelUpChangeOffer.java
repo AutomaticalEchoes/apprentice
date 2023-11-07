@@ -1,4 +1,4 @@
-package com.automaticalechoes.apprentice.api.extraOffer;
+package com.automaticalechoes.apprentice.api.extraOffer.interfaces;
 
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.npc.VillagerData;

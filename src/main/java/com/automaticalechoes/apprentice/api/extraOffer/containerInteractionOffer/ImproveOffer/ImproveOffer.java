@@ -3,6 +3,7 @@ package com.automaticalechoes.apprentice.api.extraOffer.containerInteractionOffe
 import com.automaticalechoes.apprentice.api.TagKeyMap;
 import com.automaticalechoes.apprentice.api.extraOffer.ExtraOfferTypes;
 import com.automaticalechoes.apprentice.api.extraOffer.containerInteractionOffer.ContainerInteractionOffer;
+import com.automaticalechoes.apprentice.api.extraOffer.interfaces.Improve;
 import com.automaticalechoes.apprentice.config.Config;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -14,12 +15,7 @@ import net.minecraft.world.item.trading.Merchant;
 
 import java.util.List;
 
-public abstract class ImproveOffer extends ContainerInteractionOffer<ImproveOffer> {
-
-    public static final String ITEM_TAG = "item_tag";
-    public static final String EXTRA = "extra";
-    public static final String MASTER_PIECE = "master_piece";
-    public static final String IMPROVED = "improved";
+public abstract class ImproveOffer extends ContainerInteractionOffer<ImproveOffer> implements Improve {
     protected final TagKey<Item> itemTag;
     protected final double extra;
 
@@ -56,9 +52,7 @@ public abstract class ImproveOffer extends ContainerInteractionOffer<ImproveOffe
 
     }
 
-    public boolean shouldExtra(Merchant merchant){
-        return merchant instanceof Villager abstractVillager && abstractVillager.hasCustomName() && ((Villager) merchant).getVillagerData().getLevel() >= 5;
-    }
+
 
 
 }
