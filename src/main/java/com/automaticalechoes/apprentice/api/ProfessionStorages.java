@@ -1,4 +1,4 @@
-package com.automaticalechoes.apprentice.api.mixin;
+package com.automaticalechoes.apprentice.api;
 
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.npc.VillagerProfession;
@@ -41,9 +41,9 @@ public class ProfessionStorages {
     }
 
     public static void init(){
-        List<Item>  ore = List.of(Items.IRON_INGOT, Items.GOLD_INGOT, Items.DIAMOND, Items.IRON_ORE, Items.GOLD_ORE, Items.DIAMOND_ORE);
-        PutStorages(VillagerProfession.ARMORER, ore);
-        PutStorages(VillagerProfession.WEAPONSMITH,ore);
-        PutStorages(VillagerProfession.TOOLSMITH,ore);
+//        List<Item>  ore = List.of(Items.IRON_INGOT, Items.GOLD_INGOT, Items.DIAMOND, Items.IRON_ORE, Items.GOLD_ORE, Items.DIAMOND_ORE);
+//        PutStorages(VillagerProfession.ARMORER, ore);
+//        PutStorages(VillagerProfession.WEAPONSMITH,ore);
+//        PutStorages(VillagerProfession.TOOLSMITH,ore);
     }
 }

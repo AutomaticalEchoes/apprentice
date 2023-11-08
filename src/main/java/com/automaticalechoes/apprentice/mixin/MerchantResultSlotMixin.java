@@ -1,8 +1,6 @@
 package com.automaticalechoes.apprentice.mixin;
 
-import com.automaticalechoes.apprentice.api.mixin.ProfessionStorages;
-import net.minecraft.world.entity.npc.AbstractVillager;
-import net.minecraft.world.entity.npc.InventoryCarrier;
+import com.automaticalechoes.apprentice.api.ProfessionStorages;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.player.Player;
