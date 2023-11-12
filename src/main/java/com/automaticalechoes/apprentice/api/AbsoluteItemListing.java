@@ -36,11 +36,15 @@ public  class AbsoluteItemListing implements VillagerTrades.ItemListing {
 
 
     public static MerchantOffer RepairArmor(Entity p_219693_, RandomSource p_219694_) {
-        return new RepairOffer(new ItemStack(Items.EMERALD, OfferUtils.RandomRepairCost()) , Tags.Items.ARMORS, ModelItem.ARMOR_BREAK, ModelItem.ARMOR);
+        return new RepairOffer(new ItemStack(Items.EMERALD, OfferUtils.RandomRepairCost()) , Tags.Items.ARMORS);
     }
 
     public static MerchantOffer RepairTool(Entity p_219693_, RandomSource p_219694_){
-        return new RepairOffer(new ItemStack(Items.EMERALD, OfferUtils.RandomRepairCost()), Tags.Items.TOOLS, ModelItem.TOOL_BREAK ,ModelItem.TOOL);
+        return new RepairOffer(new ItemStack(Items.EMERALD, OfferUtils.RandomRepairCost()), Tags.Items.TOOLS);
+    }
+
+    public static MerchantOffer RepairWeapon(Entity p_219693_, RandomSource p_219694_){
+        return new RepairOffer(new ItemStack(Items.EMERALD, OfferUtils.RandomRepairCost()), OfferUtils.WEAPONS);
     }
 
     public static MerchantOffer Record(Entity p_219693_, RandomSource p_219694_){

@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "masterpiece:item/show_armor",
-    "layer1": "masterpiece:item/improve"
-  }
-}

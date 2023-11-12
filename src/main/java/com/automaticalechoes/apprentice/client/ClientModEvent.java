@@ -1,7 +1,7 @@
 package com.automaticalechoes.apprentice.client;
 
 import com.automaticalechoes.apprentice.Apprentice;
-import com.automaticalechoes.apprentice.common.item.ItemRegister;
+import com.automaticalechoes.apprentice.register.ItemRegister;
 import com.automaticalechoes.apprentice.common.item.WorkRecord;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;

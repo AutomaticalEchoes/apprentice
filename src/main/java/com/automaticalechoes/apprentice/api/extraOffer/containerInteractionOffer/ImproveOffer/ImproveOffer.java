@@ -1,16 +1,14 @@
 package com.automaticalechoes.apprentice.api.extraOffer.containerInteractionOffer.ImproveOffer;
 
-import com.automaticalechoes.apprentice.api.TagKeyMap;
 import com.automaticalechoes.apprentice.api.extraOffer.containerInteractionOffer.ContainerInteractionOffer;
 import com.automaticalechoes.apprentice.api.extraOffer.interfaces.Improve;
 import com.automaticalechoes.apprentice.config.Config;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-
-import java.util.List;
 
 public abstract class ImproveOffer extends ContainerInteractionOffer<ImproveOffer> implements Improve {
     protected final TagKey<Item> itemTag;
@@ -24,7 +22,8 @@ public abstract class ImproveOffer extends ContainerInteractionOffer<ImproveOffe
 
     public ImproveOffer(CompoundTag p_45351_) {
         super(p_45351_);
-        this.itemTag = TagKeyMap.getTag(p_45351_.getString(ITEM_TAG));
+        ResourceLocation resourcelocation = ResourceLocation.tryParse(p_45351_.getString(ITEM_TAG));
+        this.itemTag =  TagKey.create(Registries.ITEM, resourcelocation);
         this.extra = p_45351_.getDouble(EXTRA);
     }
 
@@ -36,7 +35,7 @@ public abstract class ImproveOffer extends ContainerInteractionOffer<ImproveOffe
     public CompoundTag createTag() {
         CompoundTag tag = super.createTag();
         tag.putDouble(EXTRA, extra);
-        tag.putString(ITEM_TAG, TagKeyMap.getKey(itemTag));
+        tag.putString(ITEM_TAG, itemTag.location().toString());
         tag.putString(EXTRA_OFFER,getType().getName());
         return tag;
     }

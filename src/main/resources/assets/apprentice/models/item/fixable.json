@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "masterpiece:item/show_tool"
+    "layer0": "apprentice:item/fixable"
   }
 }

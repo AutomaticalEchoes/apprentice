@@ -32,8 +32,10 @@ public class CommonEvent {
         event.getTrades().get(5).add(new AbsoluteItemListing(AbsoluteItemListing::Record).IsExtra(true));
         if(event.getType() == VillagerProfession.ARMORER){
             event.getTrades().get(1).add(new AbsoluteItemListing(AbsoluteItemListing::RepairArmor).IsExtra(true));
-        }else if(event.getType() == VillagerProfession.TOOLSMITH || event.getType() == VillagerProfession.WEAPONSMITH){
+        }else if(event.getType() == VillagerProfession.TOOLSMITH) {
             event.getTrades().get(1).add(new AbsoluteItemListing(AbsoluteItemListing::RepairTool).IsExtra(true));
+        }else if(event.getType() == VillagerProfession.WEAPONSMITH){
+            event.getTrades().get(1).add(new AbsoluteItemListing(AbsoluteItemListing::RepairWeapon).IsExtra(true));
         }
     }
 

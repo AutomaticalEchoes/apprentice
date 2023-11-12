@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "masterpiece:item/show_armor"
+    "layer0": "minecraft:item/enchanted_book"
   }
 }

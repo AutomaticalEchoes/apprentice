@@ -2,9 +2,8 @@ package com.automaticalechoes.apprentice;
 
 import com.automaticalechoes.apprentice.api.extraOffer.containerInteractionOffer.ImproveOffer.VillagerProfessionImproveOffer;
 import com.automaticalechoes.apprentice.api.ModelItem;
-import com.automaticalechoes.apprentice.api.TagKeyMap;
 import com.automaticalechoes.apprentice.api.ProfessionStorages;
-import com.automaticalechoes.apprentice.common.item.ItemRegister;
+import com.automaticalechoes.apprentice.register.ItemRegister;
 import com.automaticalechoes.apprentice.config.Config;
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.registries.Registries;
@@ -74,7 +73,6 @@ public class Apprentice
 
     private void commonSetup(final FMLCommonSetupEvent event)
     {
-        TagKeyMap.init();
         ModelItem.init();
         VillagerProfessionImproveOffer.init();
         ProfessionStorages.init();

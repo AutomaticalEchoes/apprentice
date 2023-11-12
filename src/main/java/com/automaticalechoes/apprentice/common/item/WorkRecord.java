@@ -1,9 +1,11 @@
 package com.automaticalechoes.apprentice.common.item;
 
 import com.automaticalechoes.apprentice.api.extraOffer.ExtraOffer;
+import com.automaticalechoes.apprentice.api.extraOffer.containerInteractionOffer.RepairOffer;
 import com.automaticalechoes.apprentice.api.extraOffer.interfaces.Extra;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
@@ -21,6 +23,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -69,8 +72,19 @@ public class WorkRecord extends Item {
         }else if(merchantOffer != null){
             p_41423_.add(Component.translatable("apprentice.offer.cost_a").append(merchantOffer.getCostA().getDisplayName()).append("x" + merchantOffer.getCostA().getCount()).withStyle(ChatFormatting.DARK_RED));
             if(!merchantOffer.getCostB().isEmpty())
-                p_41423_.add(Component.translatable("apprentice.offer.cost_b").append(merchantOffer.getCostB().getDisplayName()).append("x" + merchantOffer.getCostB().getCount()).withStyle(ChatFormatting.DARK_RED));
-            p_41423_.add(Component.translatable("apprentice.offer.result").append(merchantOffer.getResult().getDisplayName()).append("x" + merchantOffer.getResult().getCount()).withStyle(ChatFormatting.GREEN));
+                p_41423_.add(Component.translatable("apprentice.offer.empty").append(merchantOffer.getCostB().getDisplayName()).append("x" + merchantOffer.getCostB().getCount()).withStyle(ChatFormatting.DARK_RED));
+            ItemStack result = merchantOffer.getResult();
+            p_41423_.add(Component.translatable("apprentice.offer.result").append(result.getDisplayName()).append("x" + result.getCount()).withStyle(ChatFormatting.GREEN));
+            ListTag enchantmentTags = result.getEnchantmentTags();
+            if(enchantmentTags.size() > 0){
+                List<Component> enchantments = new ArrayList<>();
+                ItemStack.appendEnchantmentNames(enchantments,enchantmentTags);
+                for (Component enchantment : enchantments) {
+                    p_41423_.add(Component.translatable("apprentice.offer.empty").append("|").append(enchantment).withStyle(ChatFormatting.DARK_PURPLE));
+                }
+
+            }
+
             if(p_41421_.getOrCreateTag().contains(PROFESSION_PATH))
                 p_41423_.add(Component.translatable("apprentice.offer.profession").append(getTypeName(p_41421_.getOrCreateTag().getString(PROFESSION_PATH))).withStyle(ChatFormatting.ITALIC).withStyle(ChatFormatting.GRAY));
         }
@@ -82,7 +96,7 @@ public class WorkRecord extends Item {
             tag.put(OFFER,offer.createTag());
             tag.putInt(COLOR,offer.hashCode());
             tag.putBoolean(MARK,true);
-            if(profession != null) tag.putString(PROFESSION_PATH, ForgeRegistries.VILLAGER_PROFESSIONS.getKey(profession).getPath());
+            if(profession != null && !(offer instanceof RepairOffer)) tag.putString(PROFESSION_PATH, ForgeRegistries.VILLAGER_PROFESSIONS.getKey(profession).getPath());
             if(uuid != null) tag.putUUID(SOURCE,uuid);
             return true;
         }
