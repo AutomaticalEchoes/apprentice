@@ -31,7 +31,7 @@ public class RepairOffer extends ContainerInteractionOffer<RepairOffer> implemen
     protected int repairValuePerCost;
     protected int rewordXpMut;
     public RepairOffer(ItemStack costA,TagKey<Item> itemTag) {
-        super(costA, ModelItem.FIXABLE_BREAK,ModelItem.FIXABLE,
+        super(costA, ModelItem.FIXABLE_BREAK.copy(),ModelItem.FIXABLE.copy(),
                 Config.RECORD_MAX_USE.get(), 1, 0.04F);
         this.itemTag = itemTag;
         this.repairValuePerCost = Config.REPAIR_BASE_PRE_COST.get();

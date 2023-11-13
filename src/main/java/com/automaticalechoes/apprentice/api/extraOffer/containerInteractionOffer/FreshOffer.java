@@ -57,10 +57,10 @@ public class FreshOffer extends ContainerInteractionOffer<FreshOffer> implements
             return Optional.empty();
 
         Enchantment enchantment = enchantments1.get(random % enchantments1.size());
-        long round = Math.round(enchantment.getMaxLevel() * leveLPercent);
-        int min1 = Math.min((int) Math.max(1,round), enchantments.get(array[i]));
+        double enchantPercent = enchantments.get(array[i]).doubleValue() / array[i].getMaxLevel();
+        int level = (int) Math.ceil(enchantment.getMaxLevel() * Math.min(leveLPercent,enchantPercent));
         enchantments.remove(array[i]);
-        enchantments.put(enchantment,min1);
+        enchantments.put(enchantment,level);
         ItemStack copy = itemStack.copy();
         copy.removeTagKey("Enchantments");
         copy.removeTagKey("StoredEnchantments");

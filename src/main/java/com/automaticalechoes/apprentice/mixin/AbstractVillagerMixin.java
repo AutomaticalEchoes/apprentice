@@ -35,12 +35,13 @@ public class AbstractVillagerMixin {
             locals = LocalCapture.CAPTURE_FAILHARD)
     private void addOffers(MerchantOffers p_35278_, VillagerTrades.ItemListing[] p_35279_, int p_35280_, CallbackInfo ci, Set<Integer> set){
         Set<Integer> extraSet = Sets.newHashSet();
+        Integer[] values = set.toArray(Integer[]::new);
         for (int i = 0; i < p_35279_.length; i++) {
             if (set.contains(i) || !(p_35279_[i] instanceof AbsoluteItemListing absoluteItemListing)) continue;
             if (absoluteItemListing.isExtra()) {
                 extraSet.add(i);
             }else {
-                set.remove(Apprentice.RANDOM.nextInt(set.size()));
+                set.remove(values[Apprentice.RANDOM.nextInt(set.size())]);
                 set.add(i);
             }
             set.addAll(extraSet);
