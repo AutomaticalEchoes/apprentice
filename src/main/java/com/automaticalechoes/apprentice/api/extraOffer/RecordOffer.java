@@ -2,6 +2,7 @@ package com.automaticalechoes.apprentice.api.extraOffer;
 
 import com.automaticalechoes.apprentice.Apprentice;
 import com.automaticalechoes.apprentice.api.ModelItem;
+import com.automaticalechoes.apprentice.api.OfferUtils;
 import com.automaticalechoes.apprentice.api.extraOffer.containerInteractionOffer.ImproveOffer.ImproveOffer;
 import com.automaticalechoes.apprentice.common.item.WorkRecord;
 import com.automaticalechoes.apprentice.config.Config;
@@ -21,7 +22,7 @@ public class RecordOffer extends ExtraOffer<RecordOffer> {
     public static final String RECORD_OFFER = "record_offer";
     private ItemStack offerRecordItem = ModelItem.RECORD_ITEM;
     public RecordOffer() {
-        this(new ItemStack(Items.EMERALD, Config.RECORD_COST.get()));
+        this(new ItemStack(Items.EMERALD, OfferUtils.RandomRecordCost()));
     }
 
     public RecordOffer(ItemStack costA) {

@@ -17,21 +17,29 @@ public class OfferUtils {
     public static final TagKey<Item> WEAPONS = TagKey.create(Registries.ITEM,new ResourceLocation("weapons"));
 
     public static int RandomRepairCost(){
-        return Config.REPAIR_BASE_COST.get() + Apprentice.RANDOM.nextInt(Config.REPAIR_RANDOM_COST.get());
+        return Config.REPAIR_COST_BASE.get() + Apprentice.RANDOM.nextInt(Config.REPAIR_COST_RANDOM.get());
     }
 
     public static int GetXpPreLevel(int level){
         return level > 1 ? 10 : 2;
     }
 
-    public static Double getRandomModifier(){
+    public static Double RandomModifier(){
         Integer integer = Config.IMPROVE_BASE.get();
         int i = Apprentice.RANDOM.nextInt(10 - integer);
         return (integer + i) / 10.0D;
     }
 
-    public static Double getRandomNumber(){
-        return (double) Apprentice.RANDOM.nextInt(64);
+    public static Double RandomNumber(){
+        return (double) Apprentice.RANDOM.nextInt(ForgeRegistries.ENCHANTMENTS.getValues().size());
+    }
+
+    public static int RandomRecordCost(){
+        return Config.RECORD_COST_BASE.get() + Apprentice.RANDOM.nextInt(Config.RECORD_COST_RANDOM.get());
+    }
+
+    public static int RandomImproveCost(){
+        return Config.IMPROVE_COST_BASE.get() + Apprentice.RANDOM.nextInt(Config.IMPROVE_COST_RANDOM.get());
     }
 
 
