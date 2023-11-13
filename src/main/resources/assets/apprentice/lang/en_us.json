@@ -24,5 +24,6 @@
   "weapons": "weapon",
 
 
-  "apprentice.enchanted_item": "enchanted item"
+  "apprentice.enchanted_item": "enchanted item",
+  "apprentice.enchanted_change_item": "enchantments changed item"
 }

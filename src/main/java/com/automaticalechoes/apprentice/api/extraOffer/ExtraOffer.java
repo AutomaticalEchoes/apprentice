@@ -1,5 +1,6 @@
 package com.automaticalechoes.apprentice.api.extraOffer;
 
+import com.automaticalechoes.apprentice.api.extraOffer.containerInteractionOffer.FreshOffer;
 import com.automaticalechoes.apprentice.api.extraOffer.containerInteractionOffer.ImproveOffer.EnchantmentImprove;
 import com.automaticalechoes.apprentice.api.extraOffer.containerInteractionOffer.ImproveOffer.ImproveOffer;
 import com.automaticalechoes.apprentice.api.extraOffer.containerInteractionOffer.ImproveOffer.ModifierImprove;
@@ -35,6 +36,12 @@ public abstract class ExtraOffer<T extends  ExtraOffer<?>> extends MerchantOffer
         super(p_45351_);
     }
 
+    @Override
+    public CompoundTag createTag() {
+        CompoundTag tag = super.createTag();
+        tag.putString(EXTRA_OFFER,getType().getName());
+        return tag;
+    }
 
     public static class Types{
         public static final HashMap<String, Type<?>> EXTRA_OFFER_TYPES = new HashMap<>();
@@ -42,6 +49,7 @@ public abstract class ExtraOffer<T extends  ExtraOffer<?>> extends MerchantOffer
         public static final Type<RepairOffer> REPAIR_OFFER_TYPE = Register("repair", RepairOffer::new);
         public static final Type<ImproveOffer> MODIFIER_IMPROVE_OFFER_TYPE = Register("modifier_improve", ModifierImprove::new);
         public static final Type<ImproveOffer> ENCHANTMENT_IMPROVE_OFFER_TYPE = Register("enchantment_improve", EnchantmentImprove::new);
+        public static final Type<FreshOffer> FRESH_OFFER_TYPE = Register("fresh",FreshOffer::new);
         public static <T extends ExtraOffer<?>> Type<T> Register(String name, Function<CompoundTag, T> supplier) {
             Type<T> tExtraOfferType = new Type<>(name, supplier);
             EXTRA_OFFER_TYPES.put(name, tExtraOfferType);

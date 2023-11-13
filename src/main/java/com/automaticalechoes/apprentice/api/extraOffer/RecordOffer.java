@@ -4,6 +4,7 @@ import com.automaticalechoes.apprentice.Apprentice;
 import com.automaticalechoes.apprentice.api.ModelItem;
 import com.automaticalechoes.apprentice.api.OfferUtils;
 import com.automaticalechoes.apprentice.api.extraOffer.containerInteractionOffer.ImproveOffer.ImproveOffer;
+import com.automaticalechoes.apprentice.api.extraOffer.interfaces.ChangeAfterTrade;
 import com.automaticalechoes.apprentice.common.item.WorkRecord;
 import com.automaticalechoes.apprentice.config.Config;
 import net.minecraft.nbt.CompoundTag;
@@ -18,9 +19,9 @@ import net.minecraft.world.item.trading.MerchantOffers;
 import java.util.List;
 import java.util.UUID;
 
-public class RecordOffer extends ExtraOffer<RecordOffer> {
+public class RecordOffer extends ExtraOffer<RecordOffer> implements ChangeAfterTrade {
     public static final String RECORD_OFFER = "record_offer";
-    private ItemStack offerRecordItem = ModelItem.RECORD_ITEM;
+    protected ItemStack offerRecordItem = ModelItem.RECORD_ITEM;
     public RecordOffer() {
         this(new ItemStack(Items.EMERALD, OfferUtils.RandomRecordCost()));
     }
@@ -47,7 +48,6 @@ public class RecordOffer extends ExtraOffer<RecordOffer> {
     public CompoundTag createTag() {
         CompoundTag tag = super.createTag();
         tag.put(RECORD_OFFER ,this.offerRecordItem.save(new CompoundTag()));
-        tag.putString(EXTRA_OFFER,getType().getName());
         return tag;
     }
 

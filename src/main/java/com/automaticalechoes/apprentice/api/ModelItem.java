@@ -14,6 +14,7 @@ public class ModelItem {
     public static ItemStack RECORD_ITEM;
 
     public static ItemStack ENCHANTABLE;
+    public static ItemStack ENCHANTED_CHANGE_ITEM;
     public static ItemStack ENCHANTED_ITEM;
     public static ItemStack FIXABLE_BREAK;
     public static ItemStack FIXABLE;
@@ -29,11 +30,13 @@ public class ModelItem {
 
         ENCHANTABLE = ItemRegister.ENCHANTABLE.get().getDefaultInstance();
         ENCHANTED_ITEM = Items.ENCHANTED_BOOK.getDefaultInstance();
+        ENCHANTED_CHANGE_ITEM = Items.ENCHANTED_BOOK.getDefaultInstance();
 
         FIXABLE_BREAK = ItemRegister.FIXABLE.get().getDefaultInstance();
         FIXABLE = ItemRegister.FIXABLE.get().getDefaultInstance();
 
         ENCHANTED_ITEM.setHoverName(Component.translatable("apprentice.enchanted_item"));
+        ENCHANTED_CHANGE_ITEM.setHoverName(Component.translatable("apprentice.enchanted_change_item"));
 
         FIXABLE_BREAK.setDamageValue(9);
 

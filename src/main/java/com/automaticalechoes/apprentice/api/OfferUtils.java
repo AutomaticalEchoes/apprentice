@@ -42,5 +42,9 @@ public class OfferUtils {
         return Config.IMPROVE_COST_BASE.get() + Apprentice.RANDOM.nextInt(Config.IMPROVE_COST_RANDOM.get());
     }
 
+    public static int RandomFreshCost(){
+        return Config.FRESH_COST_BASE.get() + Apprentice.RANDOM.nextInt(Config.FRESH_COST_RANDOM.get());
+    }
+
 
 }

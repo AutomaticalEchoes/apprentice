@@ -26,14 +26,13 @@ import java.util.Optional;
 public class RepairOffer extends ContainerInteractionOffer<RepairOffer> implements LevelUpChangeOffer {
     public static final String REPAIR_VALUE = "repair_value";
     public static final String ITEM_TAG = "item_tag";
-    public static final String REWORD_XP_MUT = "reword_xp_mut";
     public static final String PROFESSION_BONUS = "profession_bonus";
     protected final TagKey<Item> itemTag;
     protected int repairValuePerCost;
     protected int rewordXpMut;
     public RepairOffer(ItemStack costA,TagKey<Item> itemTag) {
         super(costA, ModelItem.FIXABLE_BREAK,ModelItem.FIXABLE,
-                Config.RECORD_MAX_USE.get(), Config.REPAIR_VILLAGER_XP.get(), 0.04F);
+                Config.RECORD_MAX_USE.get(), 1, 0.04F);
         this.itemTag = itemTag;
         this.repairValuePerCost = Config.REPAIR_BASE_PRE_COST.get();
         this.rewordXpMut = 1;
@@ -44,7 +43,7 @@ public class RepairOffer extends ContainerInteractionOffer<RepairOffer> implemen
     public RepairOffer(CompoundTag p_45351_) {
         super(p_45351_);
         ResourceLocation resourcelocation = ResourceLocation.tryParse(p_45351_.getString(ITEM_TAG));
-        this.itemTag =  TagKey.create(Registries.ITEM, resourcelocation);
+        this.itemTag = TagKey.create(Registries.ITEM, resourcelocation);
         this.repairValuePerCost =  p_45351_.getInt(REPAIR_VALUE);
         this.rewordXpMut = p_45351_.getInt(REWORD_XP_MUT);
     }
@@ -74,7 +73,6 @@ public class RepairOffer extends ContainerInteractionOffer<RepairOffer> implemen
         tag.putInt(REPAIR_VALUE,repairValuePerCost);
         tag.putInt(REWORD_XP_MUT,rewordXpMut);
         tag.putString(ITEM_TAG, itemTag.location().toString());
-        tag.putString(EXTRA_OFFER,getType().getName());
         return tag;
     }
 

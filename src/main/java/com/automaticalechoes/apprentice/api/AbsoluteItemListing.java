@@ -1,6 +1,7 @@
 package com.automaticalechoes.apprentice.api;
 
 import com.automaticalechoes.apprentice.api.extraOffer.RecordOffer;
+import com.automaticalechoes.apprentice.api.extraOffer.containerInteractionOffer.FreshOffer;
 import com.automaticalechoes.apprentice.api.extraOffer.containerInteractionOffer.RepairOffer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
@@ -49,5 +50,9 @@ public  class AbsoluteItemListing implements VillagerTrades.ItemListing {
 
     public static MerchantOffer Record(Entity p_219693_, RandomSource p_219694_){
         return new RecordOffer();
+    }
+
+    public static MerchantOffer Fresh(Entity p_219693_, RandomSource p_219694_) {
+        return new FreshOffer(new ItemStack(Items.EMERALD, OfferUtils.RandomFreshCost()));
     }
 }

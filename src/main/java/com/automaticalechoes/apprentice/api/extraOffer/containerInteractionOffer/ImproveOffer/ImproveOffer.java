@@ -36,7 +36,6 @@ public abstract class ImproveOffer extends ContainerInteractionOffer<ImproveOffe
         CompoundTag tag = super.createTag();
         tag.putDouble(EXTRA, extra);
         tag.putString(ITEM_TAG, itemTag.location().toString());
-        tag.putString(EXTRA_OFFER,getType().getName());
         return tag;
     }
 

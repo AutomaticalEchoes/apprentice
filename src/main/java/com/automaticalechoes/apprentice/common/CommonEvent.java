@@ -1,6 +1,7 @@
 package com.automaticalechoes.apprentice.common;
 
 import com.automaticalechoes.apprentice.api.*;
+import com.automaticalechoes.apprentice.api.extraOffer.interfaces.ChangeAfterTrade;
 import com.automaticalechoes.apprentice.api.extraOffer.interfaces.LevelUpChangeOffer;
 import com.automaticalechoes.apprentice.api.extraOffer.containerInteractionOffer.ImproveOffer.ImproveOffer;
 import com.automaticalechoes.apprentice.api.extraOffer.RecordOffer;
@@ -36,6 +37,8 @@ public class CommonEvent {
             event.getTrades().get(1).add(new AbsoluteItemListing(AbsoluteItemListing::RepairTool).IsExtra(true));
         }else if(event.getType() == VillagerProfession.WEAPONSMITH){
             event.getTrades().get(1).add(new AbsoluteItemListing(AbsoluteItemListing::RepairWeapon).IsExtra(true));
+        }else if(event.getType() == VillagerProfession.LIBRARIAN){
+            event.getTrades().get(1).add(new AbsoluteItemListing(AbsoluteItemListing::Fresh));
         }
     }
 
@@ -71,9 +74,9 @@ public class CommonEvent {
     @SubscribeEvent
     public static void OnVillagerTradeAction(TradeWithVillagerEvent event){
         if(event.getAbstractVillager() instanceof Villager villager
-                && event.getMerchantOffer() instanceof RecordOffer recordOffer
+                && event.getMerchantOffer() instanceof ChangeAfterTrade Offer
                 && event.getEntity() instanceof ServerPlayer serverPlayer){
-            recordOffer.change(event.getAbstractVillager().getOffers(),villager);
+            Offer.change(event.getAbstractVillager().getOffers(),villager);
             ((VillagerMixinInterface)villager).updateOffers();
         }
     }
