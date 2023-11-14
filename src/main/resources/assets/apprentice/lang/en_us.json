@@ -19,10 +19,8 @@
   "apprentice.offer.fix": "repair:",
   "apprentice.offer.unknown_worker": "Unknown author",
   "apprentice.offer.profession_bonus": "bonus:",
-  "forge.tools": "tool",
+  "forge.tools": "tool and weapon",
   "forge.armors": "armor",
-  "weapons": "weapon",
-
 
   "apprentice.enchanted_item": "enchanted item",
   "apprentice.enchanted_change_item": "enchantments changed item"

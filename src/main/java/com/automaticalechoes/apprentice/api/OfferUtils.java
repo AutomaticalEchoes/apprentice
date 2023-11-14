@@ -2,20 +2,23 @@ package com.automaticalechoes.apprentice.api;
 
 import com.automaticalechoes.apprentice.Apprentice;
 import com.automaticalechoes.apprentice.config.Config;
+import com.mojang.datafixers.kinds.App;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.npc.VillagerProfession;
+import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.antlr.v4.runtime.misc.MultiMap;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class OfferUtils {
-    public static final TagKey<Item> WEAPONS = TagKey.create(Registries.ITEM,new ResourceLocation("weapons"));
-
     public static int RandomRepairCost(){
         return Config.REPAIR_COST_BASE.get() + Apprentice.RANDOM.nextInt(Config.REPAIR_COST_RANDOM.get());
     }
