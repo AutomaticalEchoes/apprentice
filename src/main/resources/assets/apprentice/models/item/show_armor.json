@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "apprentice:item/show_armor"
+    "layer0": "apprentice:item/armors"
   }
 }

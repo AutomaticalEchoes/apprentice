@@ -41,7 +41,7 @@ public class Config {
         BUILDER.push("trade of record");
         RECORD_MAX_USE = BUILDER.defineInRange("tradeMaxUse",20,5,20);
         RECORD_COST_BASE = BUILDER.defineInRange("tradeCostBase",14,10,20);
-        RECORD_COST_RANDOM = BUILDER.defineInRange("tradeCostRandom",17,15,20);
+        RECORD_COST_RANDOM = BUILDER.defineInRange("tradeCostRandom",10,0,10);
         BUILDER.pop();
 
         BUILDER.push("trade of improve");

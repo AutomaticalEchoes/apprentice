@@ -58,6 +58,7 @@ public class RecordOffer extends ExtraOffer<RecordOffer> implements ChangeAfterT
         VillagerProfession profession = villager.getVillagerData().getProfession();
         UUID uuid = villager.getUUID();
         WorkRecord.PutOffer(offerRecordItem, merchantOffers.get(i) , profession, uuid);
+        this.getBaseCostA().setCount(OfferUtils.RandomRecordCost());
     }
 
     @Override
