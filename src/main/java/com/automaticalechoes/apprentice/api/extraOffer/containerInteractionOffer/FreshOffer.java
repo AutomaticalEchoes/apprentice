@@ -8,8 +8,10 @@ import com.automaticalechoes.apprentice.api.extraOffer.interfaces.LevelUpChangeO
 import com.automaticalechoes.apprentice.config.Config;
 import com.google.common.collect.Sets;
 import io.netty.handler.ipfilter.IpSubnetFilter;
+import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.npc.VillagerData;
 import net.minecraft.world.inventory.MerchantContainer;
@@ -95,6 +97,14 @@ public class FreshOffer extends ContainerInteractionOffer<FreshOffer> implements
     public boolean satisfiedBy(ItemStack p_45356_, ItemStack p_45357_) {
         return p_45356_.getItem() == this.getCostA().getItem() && p_45356_.getCount() >= this.getCostA().getCount()
                 && canUse(p_45357_);
+    }
+
+
+    @Override
+    public boolean appendHoverText(List<Component> p_41423_) {
+        p_41423_.add(Component.translatable("apprentice.offer.cost_a").append(getCostA().getDisplayName()).append("x" + getCostA().getCount()).withStyle(ChatFormatting.DARK_RED));
+        p_41423_.add(Component.translatable("apprentice.offer.fresh").append("LvMax." + (int)(leveLPercent * 5)).withStyle(ChatFormatting.DARK_GREEN));
+        return true;
     }
 
     @Override
