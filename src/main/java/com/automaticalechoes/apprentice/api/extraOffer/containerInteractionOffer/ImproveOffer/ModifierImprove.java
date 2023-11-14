@@ -38,7 +38,7 @@ public class ModifierImprove extends ImproveOffer {
             copy.addAttributeModifier(attribute, attributeModifier1,equipmentSlot);
         });
 
-        String workerName = shouldDoubleExtra ? ((AbstractVillager) merchant).getCustomName().getString() : "offer.unknown_worker";
+        String workerName = shouldDoubleExtra ? ((AbstractVillager) merchant).getCustomName().getString() : "apprentice.offer.unknown_worker";
         copy.getOrCreateTag().putString(MASTER_PIECE,workerName);
         copy.getOrCreateTag().putBoolean(IMPROVED , true);
         return Optional.of(copy);
