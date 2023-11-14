@@ -23,6 +23,7 @@ import net.minecraft.world.item.trading.MerchantOffers;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class FreshOffer extends ContainerInteractionOffer<FreshOffer> implements ChangeAfterTrade, LevelUpChangeOffer {
     public static final String RANDOM = "random";
@@ -45,26 +46,34 @@ public class FreshOffer extends ContainerInteractionOffer<FreshOffer> implements
 
     @Override
     public Optional<ItemStack> interactionAssemble(MerchantContainer merchantContainer, Merchant merchant) {
-        ItemStack itemStack = merchantContainer.getItem(0).is(Items.ENCHANTED_BOOK) ? merchantContainer.getItem(0) : merchantContainer.getItem(1);
-        Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(itemStack);
-        if(enchantments.size() == 0)
+        ItemStack itemStack = canUse(merchantContainer.getItem(0)) ? merchantContainer.getItem(0) : merchantContainer.getItem(1);
+        Map<Enchantment, Integer> selections = EnchantmentHelper.getEnchantments(itemStack);
+        if(selections.size() == 0) return Optional.empty();
+
+        List<Map.Entry<Enchantment, Integer>> filterSelection = selections.entrySet().stream().filter(entry ->
+                entry.getValue().doubleValue() / entry.getKey().getMaxLevel() <= this.leveLPercent).toList();
+        if(filterSelection.size() == 0) return Optional.empty();
+
+        int i = random % filterSelection.size();
+        Enchantment finalSelection = filterSelection.get(i).getKey();
+
+        Collection<Enchantment> values = ForgeRegistries.ENCHANTMENTS.getValues();
+//        if(!itemStack.is(Items.ENCHANTED_BOOK)){
+//            values = values.stream().filter(enchantment -> enchantment.canEnchant(itemStack)).toList();
+//        }
+        List<Enchantment> resultPool = values.stream().filter(enchantment -> !finalSelection.isCompatibleWith(enchantment)).toList();
+        if(resultPool.size() == 0)
             return Optional.empty();
 
-        int i = random % enchantments.size();
-        Enchantment[] array = enchantments.keySet().toArray(Enchantment[]::new);
-        List<Enchantment> enchantments1 = ForgeRegistries.ENCHANTMENTS.getValues().stream().filter(enchantment -> array[i].isCompatibleWith(enchantment)).toList();
-        if(enchantments1.size() == 0)
-            return Optional.empty();
-
-        Enchantment enchantment = enchantments1.get(random % enchantments1.size());
-        double enchantPercent = enchantments.get(array[i]).doubleValue() / array[i].getMaxLevel();
-        int level = (int) Math.ceil(enchantment.getMaxLevel() * Math.min(leveLPercent,enchantPercent));
-        enchantments.remove(array[i]);
-        enchantments.put(enchantment,level);
+        Enchantment resultEnchantment = resultPool.get(random % resultPool.size());
+        double present = selections.get(finalSelection).doubleValue() / finalSelection.getMaxLevel();
+        int level = (int) Math.ceil(resultEnchantment.getMaxLevel() * present);
+        selections.remove(finalSelection);
+        selections.put(resultEnchantment,level);
         ItemStack copy = itemStack.copy();
         copy.removeTagKey("Enchantments");
         copy.removeTagKey("StoredEnchantments");
-        EnchantmentHelper.setEnchantments(enchantments,copy);
+        EnchantmentHelper.setEnchantments(selections,copy);
         return Optional.of(copy);
     }
 
@@ -85,7 +94,7 @@ public class FreshOffer extends ContainerInteractionOffer<FreshOffer> implements
     @Override
     public boolean satisfiedBy(ItemStack p_45356_, ItemStack p_45357_) {
         return p_45356_.getItem() == this.getCostA().getItem() && p_45356_.getCount() >= this.getCostA().getCount()
-                && p_45357_.is(Items.ENCHANTED_BOOK)  && EnchantedBookItem.getEnchantments(p_45357_).size() > 0;
+                && canUse(p_45357_);
     }
 
     @Override
@@ -103,5 +112,11 @@ public class FreshOffer extends ContainerInteractionOffer<FreshOffer> implements
         int level = villagerData.getLevel();
         this.rewordXpMut = OfferUtils.GetXpPreLevel(level);
         this.leveLPercent = level / 5.0F;
+        this.getBaseCostA().setCount(OfferUtils.RandomFreshCost() + Config.FRESH_COST_LEVEL_BONUS.get() * level);
     }
+
+    public boolean canUse(ItemStack itemStack){
+        return EnchantmentHelper.getEnchantments(itemStack).size() > 0;
+    }
+
 }

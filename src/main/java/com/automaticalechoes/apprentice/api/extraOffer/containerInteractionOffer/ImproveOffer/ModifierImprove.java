@@ -33,7 +33,7 @@ public class ModifierImprove extends ImproveOffer {
         double amountMut = shouldDoubleExtra ? 2 * extra : extra;
         attributeModifiers.forEach((attribute, attributeModifier) -> {
             double amount = attributeModifier.getAmount();
-            double mutAmount = amount * (amount < 0 ? 1 - amountMut / 2 : 1 + amountMut);
+            double mutAmount = amount * (amount < 0 ? 1 - amountMut / 4 : 1 + amountMut);
             AttributeModifier attributeModifier1 = new AttributeModifier(attributeModifier.getId(),attributeModifier.getName(), mutAmount, attributeModifier.getOperation());
             copy.addAttributeModifier(attribute, attributeModifier1,equipmentSlot);
         });

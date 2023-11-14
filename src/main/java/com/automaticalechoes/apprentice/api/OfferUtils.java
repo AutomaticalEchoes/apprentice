@@ -25,9 +25,7 @@ public class OfferUtils {
     }
 
     public static Double RandomModifier(){
-        Integer integer = Config.IMPROVE_BASE.get();
-        int i = Apprentice.RANDOM.nextInt(10 - integer);
-        return (integer + i) / 10.0D;
+        return (Config.IMPROVE_MODIFIER_BASE.get() + Apprentice.RANDOM.nextInt(Config.IMPROVE_MODIFIER_RANDOM.get())) / 10.0D;
     }
 
     public static Double RandomNumber(){
