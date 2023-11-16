@@ -3,7 +3,7 @@
   "package": "com.automaticalechoes.apprentice.mixin",
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
-  "refmap": "mod.refmap.json",
+  "refmap": "apprentice.refmap.json",
   "plugin": "com.automaticalechoes.apprentice.mixin.MixinPlugin",
   "mixins": [
     "AbstractVillagerMixin",
