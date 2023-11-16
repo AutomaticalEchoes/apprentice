@@ -17,8 +17,8 @@ plugins {
 apply plugin:  'org.spongepowered.mixin'
 mixin {
     // MixinGradle 设置
-    add sourceSets.main, 'mod.refmap.json'
-    config 'mod.mixins.json'
+    add sourceSets.main, 'apprentice.refmap.json'
+    config 'apprentice.mixins.json'
     debug.verbose = true
     debug.export = true
 }
