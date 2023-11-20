@@ -10,7 +10,6 @@
     "MerchantContainerMixin",
     "VillagerMixin",
     "MerchantOffersMixin",
-    "MerchantResultSlotMixin",
     "ItemStackMixin",
     "ItemMixin"
   ],
