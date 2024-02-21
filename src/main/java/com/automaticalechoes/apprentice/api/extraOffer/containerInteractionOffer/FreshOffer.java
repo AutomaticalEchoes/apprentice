@@ -92,10 +92,8 @@ public class FreshOffer extends ContainerInteractionOffer<FreshOffer> implements
 
     @Override
     public boolean satisfiedBy(ItemStack p_45356_, ItemStack p_45357_) {
-        ItemStack cost = p_45356_.is(this.getCostA().getItem()) ? p_45356_ : p_45357_.is(this.getCostA().getItem()) ? p_45357_ : null;
-        if(cost == null || cost.getCount() < this.getCostA().getCount()) return false;
-        ItemStack target = p_45356_.equals(cost) ? p_45357_ : p_45356_;
-        return canUse(target);
+        return p_45356_.getItem() == this.getCostA().getItem() && p_45356_.getCount() >= this.getCostA().getCount()
+                && canUse(p_45357_);
     }
 
 

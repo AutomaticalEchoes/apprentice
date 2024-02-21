@@ -14,7 +14,7 @@ import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.function.Function;
 
-public abstract class ExtraOffer<T extends  ExtraOffer<?>> extends MerchantOffer implements Extra<T> {
+public abstract class ExtraOffer<T extends ExtraOffer<?>> extends MerchantOffer implements Extra<T> {
 
     public ExtraOffer(ItemStack costA, ItemStack result , int maxUses, int xp, float priceMultiplier) {
         super(costA, result, maxUses, xp, priceMultiplier);
@@ -34,6 +34,11 @@ public abstract class ExtraOffer<T extends  ExtraOffer<?>> extends MerchantOffer
 
     public ExtraOffer(CompoundTag p_45351_) {
         super(p_45351_);
+    }
+
+    @Override
+    public MerchantOffer copy() {
+        return this.getType().build(this.createTag());
     }
 
     @Override

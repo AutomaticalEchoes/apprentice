@@ -59,10 +59,7 @@ public class RepairOffer extends ContainerInteractionOffer<RepairOffer> implemen
 
     @Override
     public boolean satisfiedBy(ItemStack p_45356_, ItemStack p_45357_) {
-        ItemStack cost = p_45356_.is(this.getCostA().getItem()) ? p_45356_ : p_45357_.is(this.getCostA().getItem()) ? p_45357_ : null;
-        if(cost == null || cost.getCount() < this.getCostA().getCount()) return false;
-        ItemStack target = p_45356_.equals(cost) ? p_45357_ : p_45356_;
-        return target.isRepairable() && target.getCount() == 1;
+        return p_45356_.is(Items.EMERALD) && p_45356_.getCount() >= this.getCostA().getCount() && p_45357_.isRepairable() && p_45357_.getCount() ==1;
     }
 
     @Override
