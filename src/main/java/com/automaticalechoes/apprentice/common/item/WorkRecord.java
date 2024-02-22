@@ -4,6 +4,7 @@ import com.automaticalechoes.apprentice.api.extraOffer.ExtraOffer;
 import com.automaticalechoes.apprentice.api.extraOffer.containerInteractionOffer.FreshOffer;
 import com.automaticalechoes.apprentice.api.extraOffer.containerInteractionOffer.RepairOffer;
 import com.automaticalechoes.apprentice.api.extraOffer.interfaces.Extra;
+import com.automaticalechoes.apprentice.config.Config;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
@@ -72,7 +73,7 @@ public class WorkRecord extends Item {
         }else if(merchantOffer instanceof ExtraOffer extraOffer && extraOffer.appendHoverText(p_41423_)){
            return;
         }else if(merchantOffer != null){
-            p_41423_.add(Component.translatable("apprentice.offer.cost_a").append(merchantOffer.getCostA().getDisplayName()).append("x" + merchantOffer.getCostA().getCount()).withStyle(ChatFormatting.DARK_RED));
+            p_41423_.add(Component.translatable("apprentice.offer.cost_a").append(merchantOffer.getBaseCostA().getDisplayName()).append("x" + merchantOffer.getBaseCostA().getCount()).withStyle(ChatFormatting.DARK_RED));
             if(!merchantOffer.getCostB().isEmpty())
                 p_41423_.add(Component.translatable("apprentice.offer.empty").append(merchantOffer.getCostB().getDisplayName()).append("x" + merchantOffer.getCostB().getCount()).withStyle(ChatFormatting.DARK_RED));
             ItemStack result = merchantOffer.getResult();
@@ -140,7 +141,7 @@ public class WorkRecord extends Item {
         tag.put("buy",recipeFor.getCostA().copyWithCount(numA).save(new CompoundTag()));
         tag.put("buyB", recipeFor.getCostB().copyWithCount(numB).save(new CompoundTag()));
         tag.put("sell", recipeFor.getResult().copyWithCount(numResult).save(new CompoundTag()));
-        tag.putInt("maxUses", Math.min(maxUses, 30));
+        tag.putInt("maxUses", Math.min(maxUses, Config.MAX_USES_LIMIT.get()));
         offer = recipeFor instanceof Extra extra ? extra.getType().build(tag) : new MerchantOffer(tag);
         offers.add(offer);
     }

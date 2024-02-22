@@ -26,6 +26,8 @@ public class Config {
     public static final ModConfigSpec.ConfigValue<Integer> FRESH_MAX_USE;
     public static final ModConfigSpec.ConfigValue<Integer> FRESH_COST_LEVEL_BONUS;
 
+    public static final ModConfigSpec.ConfigValue<Integer> MAX_USES_LIMIT;
+
     static {
         BUILDER.push("master piece config");
         BUILDER.comment("trade cost = TradeCostBase + random(TradeCostRandom)");
@@ -58,6 +60,10 @@ public class Config {
         FRESH_COST_BASE = BUILDER.defineInRange("tradeCostBase",10,10,20);
         FRESH_COST_RANDOM = BUILDER.defineInRange("tradeCostRandom",10,0,20);
         FRESH_COST_LEVEL_BONUS = BUILDER.comment("fresh trade cost = base + random + level * bonus").defineInRange("bonusPreLevel", 2,1,4);
+        BUILDER.pop();
+
+        BUILDER.push("others");
+        MAX_USES_LIMIT = BUILDER.defineInRange("TradeMaxUseLimit", 30,30,99);
         BUILDER.pop();
 
         BUILDER.pop();
