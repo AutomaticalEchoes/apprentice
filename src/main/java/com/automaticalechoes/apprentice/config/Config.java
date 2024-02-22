@@ -20,6 +20,7 @@ public class Config {
     public static final ForgeConfigSpec.ConfigValue<Integer> IMPROVE_MAX_USE;
     public static final ForgeConfigSpec.ConfigValue<Integer> IMPROVE_MODIFIER_BASE;
     public static final ForgeConfigSpec.ConfigValue<Integer> IMPROVE_MODIFIER_RANDOM;
+    public static final ForgeConfigSpec.ConfigValue<Integer> LEARN_LIMIT;
 
     public static final ForgeConfigSpec.ConfigValue<Integer> FRESH_COST_BASE;
     public static final ForgeConfigSpec.ConfigValue<Integer> FRESH_COST_RANDOM;
@@ -53,6 +54,7 @@ public class Config {
         IMPROVE_COST_RANDOM = BUILDER.defineInRange("tradeCostRandom",8,0,32);
         IMPROVE_MODIFIER_BASE = BUILDER.defineInRange("modifierBase",3,1,10);
         IMPROVE_MODIFIER_RANDOM = BUILDER.defineInRange("modifierRandom",5,1,10);
+        LEARN_LIMIT = BUILDER.defineInRange("improveTradesLearnLimit", 20,15,99);
         BUILDER.comment("modifier = (modifierBase + modifierRandom) / 10.\n Example: Damage = WeaponsBaseDamage * (1 + modifier)");
         BUILDER.pop();
 

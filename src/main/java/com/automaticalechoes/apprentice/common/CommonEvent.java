@@ -8,6 +8,7 @@ import com.automaticalechoes.apprentice.api.extraOffer.RecordOffer;
 import com.automaticalechoes.apprentice.api.extraOffer.containerInteractionOffer.ImproveOffer.VillagerProfessionImproveOffer;
 import com.automaticalechoes.apprentice.api.mixin.MerchantOffersMixinInterface;
 import com.automaticalechoes.apprentice.api.mixin.VillagerMixinInterface;
+import com.automaticalechoes.apprentice.config.Config;
 import com.automaticalechoes.apprentice.event.VillagerUpdateTradesEvent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.ContainerHelper;
@@ -45,7 +46,7 @@ public class CommonEvent {
     @SubscribeEvent
     public static void OnVillagerUpdateTrades(VillagerUpdateTradesEvent event){
         int level = event.getVillagerData().getLevel();
-        if(event.getMerchantOffers().size() > 20 && level >= 5 && !((MerchantOffersMixinInterface)event.getMerchantOffers()).hasImprove()){
+        if(event.getMerchantOffers().size() > Config.LEARN_LIMIT.get() && level >= 5 && !((MerchantOffersMixinInterface)event.getMerchantOffers()).hasImprove()){
             ImproveOffer improveOffer = VillagerProfessionImproveOffer.OFFERS.get(event.getVillagerData().getProfession());
             if(improveOffer != null){
                 event.getMerchantOffers().add(improveOffer);
