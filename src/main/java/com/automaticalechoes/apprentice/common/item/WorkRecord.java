@@ -22,14 +22,12 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.trading.MerchantOffer;
+import net.minecraft.world.item.trading.MerchantOffers;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class WorkRecord extends Item {
     public static final String OFFER = "offer";
@@ -49,7 +47,7 @@ public class WorkRecord extends Item {
             boolean hasProfessionValid =  !p_41398_.getOrCreateTag().contains(PROFESSION_PATH) || p_41398_.getOrCreateTag().getString(PROFESSION_PATH).equals(path);
             boolean hasUUIDValid = !p_41398_.getOrCreateTag().contains(SOURCE) || !p_41398_.getOrCreateTag().getUUID(SOURCE).equals(p_41400_.getUUID());
             if(merchantOffer != null && hasProfessionValid && hasUUIDValid){
-                villager.getOffers().add(merchantOffer);
+                AddOrMerge(villager.getOffers(), merchantOffer);
                 p_41398_.shrink(1);
                 villager.handleEntityEvent((byte) 14);
                 villager.playSound(SoundEvents.VILLAGER_YES);
@@ -74,7 +72,7 @@ public class WorkRecord extends Item {
         }else if(merchantOffer instanceof ExtraOffer extraOffer && extraOffer.appendHoverText(p_41423_)){
            return;
         }else if(merchantOffer != null){
-            p_41423_.add(Component.translatable("apprentice.offer.cost_a").append(merchantOffer.getCostA().getDisplayName()).append("x" + merchantOffer.getCostA().getCount()).withStyle(ChatFormatting.DARK_RED));
+            p_41423_.add(Component.translatable("apprentice.offer.cost_a").append(merchantOffer.getBaseCostA().getDisplayName()).append("x" + merchantOffer.getBaseCostA().getCount()).withStyle(ChatFormatting.DARK_RED));
             if(!merchantOffer.getCostB().isEmpty())
                 p_41423_.add(Component.translatable("apprentice.offer.empty").append(merchantOffer.getCostB().getDisplayName()).append("x" + merchantOffer.getCostB().getCount()).withStyle(ChatFormatting.DARK_RED));
             ItemStack result = merchantOffer.getResult();
@@ -123,6 +121,42 @@ public class WorkRecord extends Item {
             }
         }
         return null;
+    }
+
+    public static void AddOrMerge(MerchantOffers offers, MerchantOffer merchantOffer){
+        MerchantOffer offer = merchantOffer;
+        Optional<MerchantOffer> sameMerchant = getSameMerchant(offers, merchantOffer);
+        if(sameMerchant.isEmpty()) {
+            offers.add(offer);
+            return;
+        }
+        MerchantOffer recipeFor = sameMerchant.get();
+        offers.remove(recipeFor);
+        int numA = Math.min(merchantOffer.getBaseCostA().getCount(), recipeFor.getBaseCostA().getCount());
+        int numB = Math.min(merchantOffer.getCostB().getCount(), recipeFor.getCostB().getCount());
+        int numResult = Math.max(merchantOffer.getResult().getCount(), recipeFor.getResult().getCount());
+        CompoundTag tag = recipeFor.createTag();
+        int maxUses = tag.contains("maxUses", 99) ? (int) Math.ceil(tag.getInt("maxUses") * 1.2) : 4;
+        tag.put("buy",recipeFor.getCostA().copyWithCount(numA).save(new CompoundTag()));
+        tag.put("buyB", recipeFor.getCostB().copyWithCount(numB).save(new CompoundTag()));
+        tag.put("sell", recipeFor.getResult().copyWithCount(numResult).save(new CompoundTag()));
+        tag.putInt("maxUses", Math.min(maxUses, 30));
+        offer = recipeFor instanceof Extra extra ? extra.getType().build(tag) : new MerchantOffer(tag);
+        offers.add(offer);
+    }
+
+    public static Optional<MerchantOffer> getSameMerchant(MerchantOffers offers, MerchantOffer merchantOffer){
+        ItemStack costA = merchantOffer.getBaseCostA();
+        ItemStack costB = merchantOffer.getCostB();
+        ItemStack result = merchantOffer.getResult();
+        Extra.Type type = merchantOffer instanceof Extra extra? extra.getType() : null;
+        return offers.stream().filter(merchantOffer1 -> {
+            if((type == null && merchantOffer1 instanceof Extra) ^ (type != null && !(merchantOffer1 instanceof Extra))) return false;
+            if(type != null && !type.equals(((Extra<?>) merchantOffer1).getType())) return false;
+            if(!costA.copyWithCount(1).equals(merchantOffer1.getBaseCostA().copyWithCount(1), true)) return false;
+            if(!costB.copyWithCount(1).equals(merchantOffer1.getCostB().copyWithCount(1), true)) return false;
+            return result.copyWithCount(1).equals(merchantOffer1.getResult().copyWithCount(1), true);
+        }).findFirst();
     }
 
     public static Component getTypeName(String Path) {
