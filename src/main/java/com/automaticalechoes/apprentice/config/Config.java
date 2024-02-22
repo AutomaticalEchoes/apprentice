@@ -67,7 +67,7 @@ public class Config {
 
         BUILDER.push("others");
         MAX_USES_LIMIT = BUILDER.defineInRange("TradeMaxUseLimit", 30,30,99);
-        TRADES_NUMBER_PRE_UPDATE = BUILDER.defineInRange("NumberOfNewTradesPreVillagerLevelUp",4,1,10);
+        TRADES_NUMBER_PRE_UPDATE = BUILDER.defineInRange("NumberOfNewTradesPreVillagerLevelUp",2,1,10);
         BUILDER.pop();
 
         BUILDER.pop();

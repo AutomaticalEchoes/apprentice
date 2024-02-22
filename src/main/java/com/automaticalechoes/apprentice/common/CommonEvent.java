@@ -63,7 +63,7 @@ public class CommonEvent {
 
         LevelUpChangeOffer[] Offers = event.getMerchantOffers().stream()
                 .filter((offer) -> offer instanceof LevelUpChangeOffer)
-                .toArray(value -> new LevelUpChangeOffer[value]);
+                .toArray(LevelUpChangeOffer[]::new);
 
         if(Offers.length > 0){
             for (LevelUpChangeOffer levelUpChangeOffer : Offers) {
