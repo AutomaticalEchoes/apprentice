@@ -27,6 +27,7 @@ public class Config {
     public static final ForgeConfigSpec.ConfigValue<Integer> FRESH_COST_LEVEL_BONUS;
 
     public static final ForgeConfigSpec.ConfigValue<Integer> MAX_USES_LIMIT;
+    public static final ForgeConfigSpec.ConfigValue<Integer> TRADES_NUMBER_PRE_UPDATE;
 
     static {
         BUILDER.push("master piece config");
@@ -64,6 +65,7 @@ public class Config {
 
         BUILDER.push("others");
         MAX_USES_LIMIT = BUILDER.defineInRange("TradeMaxUseLimit", 30,30,99);
+        TRADES_NUMBER_PRE_UPDATE = BUILDER.defineInRange("NumberOfNewTradesPreVillagerLevelUp",4,1,10);
         BUILDER.pop();
 
         BUILDER.pop();
