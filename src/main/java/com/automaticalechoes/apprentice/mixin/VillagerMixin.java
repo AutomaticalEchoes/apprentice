@@ -1,6 +1,7 @@
 package com.automaticalechoes.apprentice.mixin;
 
 import com.automaticalechoes.apprentice.api.mixin.VillagerMixinInterface;
+import com.automaticalechoes.apprentice.config.Config;
 import com.automaticalechoes.apprentice.event.VillagerUpdateTradesEvent;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.world.entity.npc.Villager;
@@ -12,6 +13,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
@@ -24,6 +26,14 @@ public abstract class VillagerMixin implements VillagerMixinInterface {
             locals = LocalCapture.CAPTURE_FAILHARD)
     public void updateTrades(CallbackInfo ci, VillagerData villagerdata, Int2ObjectMap int2objectmap, VillagerTrades.ItemListing[] avillagertrades$itemlisting, MerchantOffers merchantoffers){
         NeoForge.EVENT_BUS.post(new VillagerUpdateTradesEvent((Villager) (Object)this,merchantoffers));
+    }
+
+    @ModifyArg(
+            method = "updateTrades" ,
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/npc/Villager;addOffersFromItemListings(Lnet/minecraft/world/item/trading/MerchantOffers;[Lnet/minecraft/world/entity/npc/VillagerTrades$ItemListing;I)V", remap = false)
+    )
+    public int updateTrades(int num){
+        return Config.TRADES_NUMBER_PRE_UPDATE.get();
     }
 
     @Override

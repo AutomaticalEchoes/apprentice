@@ -8,6 +8,7 @@ import com.automaticalechoes.apprentice.api.extraOffer.interfaces.ChangeAfterTra
 import com.automaticalechoes.apprentice.api.extraOffer.interfaces.LevelUpChangeOffer;
 import com.automaticalechoes.apprentice.api.mixin.MerchantOffersMixinInterface;
 import com.automaticalechoes.apprentice.api.mixin.VillagerMixinInterface;
+import com.automaticalechoes.apprentice.config.Config;
 import com.automaticalechoes.apprentice.event.VillagerUpdateTradesEvent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.npc.Villager;
@@ -40,7 +41,7 @@ public class CommonEvent {
     @SubscribeEvent
     public static void OnVillagerUpdateTrades(VillagerUpdateTradesEvent event){
         int level = event.getVillagerData().getLevel();
-        if(event.getMerchantOffers().size() > 20 && level >= 5 && !((MerchantOffersMixinInterface)event.getMerchantOffers()).hasImprove()){
+        if(event.getMerchantOffers().size() > Config.LEARN_LIMIT.get() && level >= 5 && !((MerchantOffersMixinInterface)event.getMerchantOffers()).hasImprove()){
             ImproveOffer improveOffer = VillagerProfessionImproveOffer.OFFERS.get(event.getVillagerData().getProfession());
             if(improveOffer != null){
                 event.getMerchantOffers().add(improveOffer);
@@ -54,10 +55,9 @@ public class CommonEvent {
             recordOffer.change(event.getMerchantOffers(), event.getVillager());
         });
 
-
         LevelUpChangeOffer[] Offers = event.getMerchantOffers().stream()
                 .filter((offer) -> offer instanceof LevelUpChangeOffer)
-                .toArray(value -> new LevelUpChangeOffer[value]);
+                .toArray(LevelUpChangeOffer[]::new);
 
         if(Offers.length > 0){
             for (LevelUpChangeOffer levelUpChangeOffer : Offers) {

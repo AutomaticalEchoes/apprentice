@@ -53,7 +53,9 @@ public class RecordOffer extends ExtraOffer<RecordOffer> implements ChangeAfterT
 
     public void change(MerchantOffers offers, Villager villager){
         List<MerchantOffer> merchantOffers = offers.stream().filter((offer) -> !(offer instanceof RecordOffer) && !(offer instanceof ImproveOffer)).toList();
-        int i = Apprentice.RANDOM.nextInt(merchantOffers.size());
+        int size = merchantOffers.size();
+        if(size <= 0) return;
+        int i = Apprentice.RANDOM.nextInt(size);
         this.offerRecordItem = super.getResult().copy();
         VillagerProfession profession = villager.getVillagerData().getProfession();
         UUID uuid = villager.getUUID();

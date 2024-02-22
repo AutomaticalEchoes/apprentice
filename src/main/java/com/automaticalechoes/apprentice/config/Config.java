@@ -20,6 +20,7 @@ public class Config {
     public static final ModConfigSpec.ConfigValue<Integer> IMPROVE_MAX_USE;
     public static final ModConfigSpec.ConfigValue<Integer> IMPROVE_MODIFIER_BASE;
     public static final ModConfigSpec.ConfigValue<Integer> IMPROVE_MODIFIER_RANDOM;
+    public static final ModConfigSpec.ConfigValue<Integer> LEARN_LIMIT;
 
     public static final ModConfigSpec.ConfigValue<Integer> FRESH_COST_BASE;
     public static final ModConfigSpec.ConfigValue<Integer> FRESH_COST_RANDOM;
@@ -27,6 +28,7 @@ public class Config {
     public static final ModConfigSpec.ConfigValue<Integer> FRESH_COST_LEVEL_BONUS;
 
     public static final ModConfigSpec.ConfigValue<Integer> MAX_USES_LIMIT;
+    public static final ModConfigSpec.ConfigValue<Integer> TRADES_NUMBER_PRE_UPDATE;
 
     static {
         BUILDER.push("master piece config");
@@ -52,6 +54,7 @@ public class Config {
         IMPROVE_COST_RANDOM = BUILDER.defineInRange("tradeCostRandom",8,0,32);
         IMPROVE_MODIFIER_BASE = BUILDER.defineInRange("modifierBase",3,1,10);
         IMPROVE_MODIFIER_RANDOM = BUILDER.defineInRange("modifierRandom",5,1,10);
+        LEARN_LIMIT = BUILDER.defineInRange("improveTradesLearnLimit", 20,15,99);
         BUILDER.comment("modifier = (modifierBase + modifierRandom) / 10.\n Example: Damage = WeaponsBaseDamage * (1 + modifier)");
         BUILDER.pop();
 
@@ -64,6 +67,7 @@ public class Config {
 
         BUILDER.push("others");
         MAX_USES_LIMIT = BUILDER.defineInRange("TradeMaxUseLimit", 30,30,99);
+        TRADES_NUMBER_PRE_UPDATE = BUILDER.defineInRange("NumberOfNewTradesPreVillagerLevelUp",1,1,10);
         BUILDER.pop();
 
         BUILDER.pop();
