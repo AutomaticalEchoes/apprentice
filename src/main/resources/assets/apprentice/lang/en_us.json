@@ -1,0 +1,28 @@
+{
+  "apprentice.itemGroup":"Apprentice’s Zeal",
+  "item.apprentice.work_record": "work record",
+  "item.apprentice.show_tool": "tool",
+  "item.apprentice.show_tool_improve": "improved tool",
+  "item.apprentice.show_armor": "armor",
+
+  "item.apprentice.show_armor_improve": "improved armor",
+  "item.apprentice.enchantable": "enchantable item",
+  "item.apprentice.fixable": "repairable armor",
+
+  "apprentice.offer.cost_a": "cost:",
+  "apprentice.offer.empty": "     ",
+  "apprentice.offer.result": "result:",
+  "apprentice.offer.fix_type": "type:",
+  "apprentice.offer.unknown": "unknown merchant",
+  "apprentice.offer.profession": "profession:",
+  "apprentice.offer.improve_by": "-by ",
+  "apprentice.offer.fix": "repair:",
+  "apprentice.offer.unknown_worker": "Unknown author",
+  "apprentice.offer.profession_bonus": "bonus:",
+  "apprentice.offer.fresh": "refresh:",
+  "forge.tools": "tool and weapon",
+  "forge.armors": "armor",
+
+  "apprentice.enchanted_item": "enchanted item",
+  "apprentice.enchanted_change_item": "enchantments changed item"
+}
