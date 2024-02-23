@@ -52,14 +52,31 @@ public class RepairOffer extends ContainerInteractionOffer<RepairOffer> implemen
     public Optional<ItemStack> interactionAssemble(MerchantContainer merchantContainer, Merchant merchant) {
         ItemStack copy = (merchantContainer.getItem(1).isRepairable() ?
                 merchantContainer.getItem(1) : merchantContainer.getItem(0)).copy();
-        int repairValue = this.getCostA().getCount() * (copy.is(itemTag) ? repairValuePerCost  : repairValuePerCost / 2);
+        ItemStack cost = merchantContainer.getItem(0).is(getBaseCostA().getItem()) ?  merchantContainer.getItem(0) : merchantContainer.getItem(1);
+        int repairValue = cost.getCount() * (copy.is(itemTag) ? repairValuePerCost  : repairValuePerCost / 2);
         copy.setDamageValue(copy.getDamageValue() - repairValue);
         return Optional.of(copy);
     }
 
     @Override
+    public boolean take(ItemStack p_45362_, ItemStack p_45363_) {
+        if (!this.satisfiedBy(p_45362_, p_45363_)) {
+            return false;
+        } else{
+            int damageValue = p_45363_.getDamageValue();
+            int costCount = p_45362_.getCount();
+            int repairPerCost = p_45363_.is(itemTag)? this.repairValuePerCost : repairValuePerCost / 2;
+            int repairValue = costCount * repairPerCost;
+            if(repairValue > damageValue) costCount = damageValue / repairPerCost + 1;
+            p_45363_.shrink(1);
+            p_45362_.shrink(costCount);
+            return true;
+        }
+    }
+
+    @Override
     public boolean satisfiedBy(ItemStack p_45356_, ItemStack p_45357_) {
-        return p_45356_.is(Items.EMERALD) && p_45356_.getCount() >= this.getCostA().getCount() && p_45357_.isRepairable() && p_45357_.getCount() ==1;
+        return p_45356_.is(Items.EMERALD) && p_45356_.getCount() >= this.getCostA().getCount() && p_45357_.isRepairable() && p_45357_.getCount() ==1 && p_45357_.getDamageValue() > 0;
     }
 
     @Override

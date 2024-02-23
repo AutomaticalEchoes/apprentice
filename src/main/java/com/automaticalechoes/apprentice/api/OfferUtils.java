@@ -19,9 +19,9 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class OfferUtils {
-    public static int RandomRepairCost(){
-        return Config.REPAIR_COST_BASE.get() + Apprentice.RANDOM.nextInt(Config.REPAIR_COST_RANDOM.get());
-    }
+//    public static int RandomRepairCost(){
+//        return Config.REPAIR_COST_BASE.get() + Apprentice.RANDOM.nextInt(Config.REPAIR_COST_RANDOM.get());
+//    }
 
     public static int GetXpPreLevel(int level){
         return level > 1 ? 10 : 2;
