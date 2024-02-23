@@ -5,8 +5,6 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 public class Config {
     public static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
     public static final ModConfigSpec SPEC;
-    public static final ModConfigSpec.ConfigValue<Integer> REPAIR_COST_BASE;
-    public static final ModConfigSpec.ConfigValue<Integer> REPAIR_COST_RANDOM;
     public static final ModConfigSpec.ConfigValue<Integer> REPAIR_BASE_PRE_COST;
     public static final ModConfigSpec.ConfigValue<Double> REPAIR_MUT_PRE_LEVEL;
     public static final ModConfigSpec.ConfigValue<Integer> REPAIR_MAX_USE;
@@ -35,8 +33,6 @@ public class Config {
         BUILDER.comment("trade cost = TradeCostBase + random(TradeCostRandom)");
         BUILDER.push("trade of repair");
         REPAIR_MAX_USE = BUILDER.defineInRange("tradeMaxUse",20,5,20);
-        REPAIR_COST_BASE = BUILDER.defineInRange("tradeCostBase",5,5,10);
-        REPAIR_COST_RANDOM = BUILDER.defineInRange("tradeCostRandom",12,5,20);
         BUILDER.comment("repair durability = (basePreCost + (mutPreLevel * villagerLevel) ) * cost");
         REPAIR_BASE_PRE_COST = BUILDER.defineInRange("repairBasePreCost",10,5,25);
         REPAIR_MUT_PRE_LEVEL = BUILDER.defineInRange("mutPreLevel",0.40F,0.20F,0.40F);
